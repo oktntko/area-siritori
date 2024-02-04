@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>盤上しりとり</title>
+<link rel="shortcut icon" href="./image/favicon.ico">
+<link rel="icon" href="./image/favicon.ico">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!-- css -->
+<link rel="stylesheet" href="./style.css"></link>
+
+</head>
+<body>
+
+<!-- 開発用フォーム -->
+<form id="devForm">
+<textarea id="userData">// ユーザー設定（仮）
+playerNames = [ "Ａ太", "Ｂ子", "Ｃ郎" ];      // 参加者名一覧
+validWords = [ "りんご", "ごりら", "らっぱ" ]; // 許容する単語一覧（現在は制約を掛けていない）
+startWord = "しりとり";                       // 始めの中央4文字</textarea>
+<input type="button" value="ゲーム開始" onclick="clickStart()">
+</form>
+
+<table id="board" border="0" cellspacing="0" cellpadding="0"></table>
+<form id="form">
+  <p id="status"></p>
+
+  <!-- 最初のセル選択エリア -->
+  <div id="selectStartCell">
+    <input type="button" value="し" onclick="clickStartCell({'Top': 2, 'Left': 2})">
+    <input type="button" value="り" onclick="clickStartCell({'Top': 2, 'Left': 3})">
+    <input type="button" value="と" onclick="clickStartCell({'Top': 3, 'Left': 2})">
+    <input type="button" value="り" onclick="clickStartCell({'Top': 3, 'Left': 3})">
+  </div>
+
+  <!-- 単語入力エリア -->
+  <div id="inputWords">
+    <input type="radio" name="radioDirection" id="TopLeft"><label for="TopLeft">↖</label>
+    <input type="radio" name="radioDirection" id="Top"><label for="Top">↑</label>
+    <input type="radio" name="radioDirection" id="TopRight"><label for="TopRight">↗</label><br>
+    <input type="radio" name="radioDirection" id="Left"><label for="Left">←</label>
+    <label>■</label>
+    <input type="radio" name="radioDirection" id="Right"><label for="Right">→</label><br>
+    <input type="radio" name="radioDirection" id="BottomLeft"><label for="BottomLeft">↙</label>
+    <input type="radio" name="radioDirection" id="Bottom"><label for="Bottom">↓</label>
+    <input type="radio" name="radioDirection" id="BottomRight"><label for="BottomRight">↘</label><br>
+    <input id="word" type="text" pattern="^[ぁ-んー]+$" maxlength="6">
+    <input type="text" style="display:none"> <!-- ダミー -->
+    <input type="button" value="決定" onclick="clickDecision()">
+  </div>
+
+  <p id="errorMessage"></p>
+</form>
+<div id="log"></div>
+
+<!-- script -->
+<script type="text/JavaScript" src="./script.js" charset="UTF-8"></script>
+
+</body>
+</html>
