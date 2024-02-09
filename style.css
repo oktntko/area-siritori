@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+textarea#userData {
+  width: 700px;
+  height:60px;
+  display: block;
+}
+
+table#board {
+  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: mediumseagreen;
+}
+
+table#board td {
+  width: 50px;
+  height: 50px;
+  line-height: 48px;
+  font-size: 36px;
+  text-align: center;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+table#board td.focusCell {
+  font-weight: bold;
+  background-color: seagreen;
+}
+
+form {
+  margin: 2px 0;
+  padding: 4px;
+  border: 1px solid silver;
+}
+
+form#form {
+  display: none;
+}
+
+p#status {
+  margin: 0;
+}
+
+div#selectStartCell, div#inputWords {
+  display: none;
+}
+
+div#inputWords input[type="radio"] {
+  display: none;
+}
+
+div#inputWords label {
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: gainsboro;
+  float: left;
+}
+
+div#inputWords input[type="radio"]:checked + label {
+  background-color: red;
+}
+
+div#inputWords br {
+  clear: left;
+}
+
+p#errorMessage {
+  color: red;
+  margin: 0;
+}
+
+div#log {
+  margin: 2px 0;
+  background-color: khaki;
+}
+
+div#log div:nth-last-child(2n) {
+  background-color: darkkhaki;
+}
