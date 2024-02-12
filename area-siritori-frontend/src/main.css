@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  /* スクロールバーの表示・非表示でずれるため、常にスクロールバーを表示 */
+  @apply overflow-y-scroll;
+}

@@ -12,6 +12,7 @@ export default function Home() {
       >
         {count}
       </button>
+      <code>code 01234</code>
     </>
   );
 }
