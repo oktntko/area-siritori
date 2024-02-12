@@ -1,18 +1,129 @@
-export default function Home() {
-  const [count, setCount] = useState<number>(0);
+import { Icon } from '@iconify/react';
+import { range } from 'remeda';
+import { Link } from '~/router';
 
+export default function Home() {
   return (
-    <>
-      <h1>Home</h1>
-      <button
-        type="button"
-        onClick={() => {
-          setCount(count + 1);
-        }}
-      >
-        {count}
-      </button>
-      <code>code 01234</code>
-    </>
+    <div className="flex min-h-screen w-full flex-col items-center justify-center gap-16 bg-gray-100">
+      <div className="-mt-2 mb-2">
+        <h1 className="text-8xl">
+          <span className="font-bold text-blue-800">盤</span>上しりと
+          <span className="font-bold text-red-800">り</span>
+        </h1>
+      </div>
+
+      {/* Card Desing https://www.youtube.com/watch?app=desktop&v=B2PVKb5L0wo */}
+      <div className="flex flex-wrap items-center justify-center gap-8 bg-gray-100">
+        {/* Card */}
+        {range(1, 5).map((i) => {
+          return (
+            <Link
+              to={`/room/:id`}
+              params={{ id: `${i}` }}
+              key={i}
+              className="group relative w-60 transform cursor-pointer rounded-xl bg-white p-2 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            >
+              {/* Image */}
+              <img
+                className="h-40 rounded-xl object-cover"
+                src="https://picsum.photos/320/160"
+                alt=""
+              ></img>
+              <div className="p-2">
+                {/* Heading */}
+                <h2 className="mb-2 text-lg font-bold ">Room No.{i}</h2>
+                {/* Description */}
+                <p className="text-sm text-gray-600">
+                  {range(
+                    0,
+                    Math.floor(Math.random() * (4 /*=max*/ - 1 /*=min*/ + 1) + /*=min*/ 1),
+                  ).map(() => (
+                    <>{avator()}</>
+                  ))}
+                </p>
+              </div>
+              <div className="absolute inset-0 h-full w-full rounded-xl bg-black/30 opacity-0 transition-all group-hover:opacity-100"></div>
+              <div className="absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2 text-center text-white opacity-0 transition-all group-hover:top-[calc(50%-24px)] group-hover:opacity-100">
+                <h3 className="text-2xl font-bold tracking-widest">JOIN!</h3>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+
+      <div>
+        <button
+          type="button"
+          className="flex flex-row items-center justify-center rounded-full bg-blue-500 px-8 py-2 text-xl font-bold text-white shadow-lg transition-all hover:bg-blue-700"
+        >
+          <Icon icon="openmoji:japanese-symbol-for-beginner" className="-ml-2 mr-2 inline "></Icon>
+          <span className="">Tutorial</span>
+        </button>
+      </div>
+    </div>
   );
+}
+
+function avator() {
+  const emojis = [
+    '😄',
+    '😃',
+    '😀',
+    '😊',
+    '😉',
+    '😍',
+    '😘',
+    '😚',
+    '😗',
+    '😙',
+    '😜',
+    '😝',
+    '😛',
+    '😳',
+    '😁',
+    '😔',
+    '😌',
+    '😒',
+    '😞',
+    '😣',
+    '😢',
+    '😂',
+    '😭',
+    '😪',
+    '😥',
+    '😰',
+    '😅',
+    '😓',
+    '😩',
+    '😫',
+    '😨',
+    '😱',
+    '😠',
+    '😡',
+    '😤',
+    '😖',
+    '😆',
+    '😋',
+    '😷',
+    '😎',
+    '😴',
+    '😵',
+    '😲',
+    '😟',
+    '😦',
+    '😧',
+    '😈',
+    '👿',
+    '😮',
+    '😬',
+    '😐',
+    '😕',
+    '😯',
+    '😶',
+    '😇',
+    '😏',
+    '😑',
+  ];
+
+  return emojis[Math.floor(Math.random() * emojis.length)];
 }
