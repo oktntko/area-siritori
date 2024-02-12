@@ -28,6 +28,8 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/prefer-ts-expect-error": "warn",
   },
   settings: {
     react: {
