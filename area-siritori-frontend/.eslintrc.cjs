@@ -27,6 +27,8 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/prefer-ts-expect-error': 'warn',
+    'dot-notation': 'off',
+    '@typescript-eslint/dot-notation': 'off',
   },
   settings: {
     react: {

@@ -18,8 +18,8 @@ export default function Home() {
         {range(1, 5).map((i) => {
           return (
             <Link
-              to={`/room/:id`}
-              params={{ id: `${i}` }}
+              to={`/room/:room_id`}
+              params={{ room_id: `${i}` }}
               key={i}
               className="group relative w-60 transform cursor-pointer rounded-xl bg-white p-2 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
@@ -42,8 +42,10 @@ export default function Home() {
                   ))}
                 </p>
               </div>
+
+              {/* Overlay */}
               <div className="absolute inset-0 h-full w-full rounded-xl bg-black/30 opacity-0 transition-all group-hover:opacity-100"></div>
-              <div className="absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2 text-center text-white opacity-0 transition-all group-hover:top-[calc(50%-24px)] group-hover:opacity-100">
+              <div className="absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2 text-center text-white opacity-0 transition-all group-hover:top-[calc(50%-32px)] group-hover:opacity-100">
                 <h3 className="text-2xl font-bold tracking-widest">JOIN!</h3>
               </div>
             </Link>
@@ -51,7 +53,16 @@ export default function Home() {
         })}
       </div>
 
-      <div>
+      <div className="flex flex-col gap-2">
+        <Link
+          to={`/play`}
+          type="button"
+          className="flex flex-row items-center justify-center rounded-full bg-green-500 px-8 py-2 text-xl font-bold text-white shadow-lg transition-all hover:bg-green-700"
+        >
+          <Icon icon="icon-park:family" className="-ml-2 mr-2 inline "></Icon>
+          <span className="">Play with Friend</span>
+        </Link>
+
         <button
           type="button"
           className="flex flex-row items-center justify-center rounded-full bg-blue-500 px-8 py-2 text-xl font-bold text-white shadow-lg transition-all hover:bg-blue-700"

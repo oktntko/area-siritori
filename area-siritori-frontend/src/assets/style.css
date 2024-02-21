@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+table#board {
+  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: mediumseagreen;
+}
+
+table#board td {
+  width: 50px;
+  height: 50px;
+  line-height: 48px;
+  font-size: 36px;
+  text-align: center;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+table#board td.focusCell {
+  font-weight: bold;
+  background-color: seagreen;
+}
