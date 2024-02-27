@@ -13,7 +13,7 @@ export default defineConfig({
     // @ts-ignore
     generouted(),
     AutoImport({
-      imports: ['react'],
+      imports: ['react', 'react-router-dom'],
       dts: 'src/auto-imports.d.ts',
     }),
     Unfonts({

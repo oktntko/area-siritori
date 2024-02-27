@@ -1,7 +1,8 @@
 import { Icon } from '@iconify/react';
 import { range } from 'remeda';
-import { useParams } from '~/router';
 import '~/assets/style.css';
+import { socket } from '~/lib/socket.io';
+import { useParams } from '~/router';
 
 type Position = {
   rawIndex: number;
@@ -33,6 +34,22 @@ type History = {
 
 export default function Home() {
   const { room_id } = useParams('/room/:room_id');
+
+  useEffect(() => {
+    socket.connect();
+
+    socket.on('connect', () => {
+      console.log('connect');
+    });
+
+    socket.on('event', (args: { id: string; username: string }) => {
+      console.log('event', args);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [room_id]);
 
   const playerNames = ['Ａ太', 'Ｂ子', 'Ｃ郎']; // 参加者名一覧
   const [turn, setTurn] = useState(0); // 手番
