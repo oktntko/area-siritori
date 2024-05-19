@@ -33,14 +33,10 @@ export default function Home() {
                 {/* Heading */}
                 <h2 className="mb-2 text-lg font-bold ">Room No.{i}</h2>
                 {/* Description */}
-                <p className="text-sm text-gray-600">
-                  {range(
-                    0,
-                    Math.floor(Math.random() * (4 /*=max*/ - 1 /*=min*/ + 1) + /*=min*/ 1),
-                  ).map(() => (
-                    <>{avator()}</>
-                  ))}
-                </p>
+                {range(
+                  0,
+                  Math.floor(Math.random() * (4 /*=max*/ - 1 /*=min*/ + 1) + /*=min*/ 1),
+                ).map(() => avator())}
               </div>
 
               {/* Overlay */}

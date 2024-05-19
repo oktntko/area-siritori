@@ -5,6 +5,8 @@ import { createServer } from 'node:http';
 import { Server } from 'socket.io';
 import { env } from '~/lib/env';
 import { log } from '~/lib/log4js';
+import { NotFoundHandler, UnexpectedErrorHandler } from '~/middleware/error';
+import { UserRouter } from '~/router/UserRouter';
 
 /**
  * https://github.com/microsoft/TypeScript-Node-Starter/blob/master/src/types/express-session-types.d.ts
@@ -34,6 +36,9 @@ const io = new Server(server);
 app.use(helmet());
 
 app.set('trust proxy', 1); // trust first proxy
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const SessionMiddleware = session({
   secret: env.session.SESSION_SECRET,
@@ -68,6 +73,11 @@ nsp.on('connection', (socket) => {
     log.info('disconnect', req.sessionID, socket.id, reason); // the Set contains at least the socket ID
   });
 });
+
+app.use(UserRouter);
+
+app.use(NotFoundHandler);
+app.use(UnexpectedErrorHandler);
 
 server.on('error', (err) => {
   log.error('Error opening server', err);
