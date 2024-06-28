@@ -7,6 +7,7 @@ import { env } from '~/lib/env';
 import { log } from '~/lib/log4js';
 import { NotFoundHandler, UnexpectedErrorHandler } from '~/middleware/error';
 import { UserRouter } from '~/router/UserRouter';
+import { WordRouter } from '~/router/WordRouter';
 
 /**
  * https://github.com/microsoft/TypeScript-Node-Starter/blob/master/src/types/express-session-types.d.ts
@@ -75,6 +76,7 @@ nsp.on('connection', (socket) => {
 });
 
 app.use(UserRouter);
+app.use(WordRouter);
 
 app.use(NotFoundHandler);
 app.use(UnexpectedErrorHandler);

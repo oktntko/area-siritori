@@ -1,7 +1,8 @@
 import { Icon } from '@iconify/react';
+import axios from 'axios';
 import { range } from 'remeda';
-import { useParams } from '~/router';
 import '~/assets/style.css';
+import { useParams } from '~/router';
 
 type Position = {
   rawIndex: number;
@@ -166,9 +167,9 @@ export default function Home() {
   // 単語入力エリア
   function InputWordsArea() {
     // 単語の決定ボタンクリック時
-    function clickDecision(word: string, direction: Direction) {
+    async function clickDecision(word: string, direction: Direction) {
       // 単語チェック
-      const hasError = checkWord(word, direction);
+      const hasError = await checkWord(word, direction);
       console.log(hasError);
       if (hasError?.message) {
         setError(hasError);
@@ -190,7 +191,7 @@ export default function Home() {
     return (
       <form
         className="flex flex-col items-center gap-2"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
 
           // 入力チェック
@@ -216,7 +217,7 @@ export default function Home() {
 
           const direction = DirectionObject[directionString];
           // 単語の決定ボタンクリック時
-          clickDecision(word, direction);
+          await clickDecision(word, direction);
         }}
       >
         <p>{playerNames[turn]}さんの手番です。進む方向を選び、文字を入力してください。</p>
@@ -301,7 +302,7 @@ export default function Home() {
     );
 
     // 単語チェック
-    function checkWord(word: string, direction: Direction) {
+    async function checkWord(word: string, direction: Direction) {
       // 「ん」チェック
       if (word.endsWith('ん')) {
         return { message: '「ん」で終わってはいけません。' };
@@ -353,10 +354,18 @@ export default function Home() {
         };
       }
 
+      async function validWords(word: string) {
+        const res = await axios.get<{ ok: boolean }>(`/api/word/${word}`);
+        return res.data;
+      }
+
       // 許容単語チェック
-      // for (let i = 0; i < validWords.length; i ++) {
-      //   return { "result": false, "errorMessage": "辞書に載っていません。" };
-      // }
+      const { ok } = await validWords(word);
+      if (!ok) {
+        return {
+          message: `存在しない単語です。`,
+        };
+      }
 
       // エラー無し
       console.log('エラー無し');
